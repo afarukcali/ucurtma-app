@@ -75,7 +75,7 @@ function FeaturedCampaign({ loading, data, error }) {
       <Box className="swiper-button-prev2" left="0" {...arrowProps}>
         <Box as={ChevronLeft} />
       </Box>
-      {data.campaigns.campaigns.map((campaign, campaignIndex) => {
+      {data.randomCampaigns.campaigns.map((campaign, campaignIndex) => {
         const currentFund = parseInt(campaign?.totalFunds || 0, 10);
         const totalPercent =
           (currentFund * 100) / (campaign?.campaignTarget || 0);
