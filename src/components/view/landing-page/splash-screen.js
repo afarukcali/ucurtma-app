@@ -5,7 +5,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import { Flex, Link, Icon, Box, Heading, Text, Button } from '@chakra-ui/core';
 
 import { useQuery } from '@apollo/react-hooks';
-import { GET_CAMPAIGNS, GET_RANDOM_CAMPAIGNS } from '../../../graphql/queries';
+import { GET_RANDOM_CAMPAIGNS } from '../../../graphql/queries';
 import FeaturedCampaign from '../../ui/featured-campaign';
 
 function SplashScreen() {
@@ -17,6 +17,10 @@ function SplashScreen() {
   const { loading, error, data } = useQuery(GET_RANDOM_CAMPAIGNS, {
     variables: { count: 3, listHash: '' },
   });
+
+  const onSwiperClick = listHash => {
+    console.log(listHash);
+  };
 
   return (
     <>
@@ -106,7 +110,12 @@ function SplashScreen() {
           backgroundPosition="center center"
           px={4}
         >
-          <FeaturedCampaign data={data} error={error} loading={loading} />
+          <FeaturedCampaign
+            data={data}
+            error={error}
+            loading={loading}
+            onSwiperClick={onSwiperClick}
+          />
         </Flex>
       </Flex>
     </>

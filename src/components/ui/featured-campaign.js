@@ -23,7 +23,7 @@ import Loader from './loader';
 
 SwiperCore.use([Navigation]);
 
-function FeaturedCampaign({ loading, data, error }) {
+function FeaturedCampaign({ loading, data, error, onSwiperClick }) {
   const navigate = useNavigate();
   const { t } = useTranslation('featuredCampaign');
   const [activeCard, setActiveCard] = useState(0);
@@ -56,7 +56,12 @@ function FeaturedCampaign({ loading, data, error }) {
     <Swiper
       spaceBetween={2}
       slidesPerView={1}
-      onSlideChange={swiper => setActiveCard(swiper.realIndex)}
+      onSlideChange={swiper => {
+        if (swiper.realIndex > 1) {
+          onSwiperClick(data.randomCampaigns.listHash);
+        }
+        setActiveCard(swiper.realIndex);
+      }}
       centeredSlides
       loop
       navigation={{
