@@ -14,13 +14,9 @@ function SplashScreen() {
   //   variables: { start: 0, end: 8 },
   // });
 
-  const { loading, error, data } = useQuery(GET_RANDOM_CAMPAIGNS, {
+  const { loading, error, data, refetch } = useQuery(GET_RANDOM_CAMPAIGNS, {
     variables: { count: 3, listHash: '' },
   });
-
-  const onSwiperClick = listHash => {
-    console.log(listHash);
-  };
 
   return (
     <>
@@ -114,7 +110,12 @@ function SplashScreen() {
             data={data}
             error={error}
             loading={loading}
-            onSwiperClick={onSwiperClick}
+            onSwiperClick={listHash => {
+              refetch({
+                count: 3,
+                listHash,
+              });
+            }}
           />
         </Flex>
       </Flex>
